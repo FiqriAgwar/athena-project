@@ -29,7 +29,7 @@ module.exports = {
               Embed.setDescription(
                 `${member} went AFK <t:${data.Time}:R>\n **Status**: ${data.Status}`
               );
-              return message.reply({ embeds: [Embed], ephermal: true });
+              return message.reply({ embeds: [Embed], ephemeral: true });
             }
           }
         );

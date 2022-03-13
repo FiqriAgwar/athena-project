@@ -31,15 +31,16 @@ module.exports = {
         content: `The data for this system is outdated.`,
       });
 
-    if (
-      !member.roles.cache.find((role) => {
-        console.log(
-          role.id,
-          TicketSetup.Handlers,
-          role.id == TicketSetup.Handlers
-        );
+    console.log(
+      member.roles.cache.find((role) => {
         role.id == TicketSetup.Handlers;
       })
+    );
+
+    if (
+      member.roles.cache.find((role) => {
+        role.id == TicketSetup.Handlers;
+      }) == undefined
     ) {
       return interaction.reply({
         content: "You can't use this button.",

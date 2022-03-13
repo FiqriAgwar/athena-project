@@ -35,7 +35,7 @@ module.exports = {
         }
 
         const Embed = message.embeds[0];
-        if (!embed) {
+        if (!Embed) {
           return;
         }
 

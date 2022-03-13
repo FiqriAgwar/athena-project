@@ -1,5 +1,8 @@
 const { Client, Collection } = require("discord.js");
-const { TokenDev, TokenRelease } = require("./config.json");
+
+require("dotenv").config();
+const TOKEN = process.env.TOKEN;
+
 const { promisify } = require("util");
 const { glob } = require("glob");
 const PG = promisify(glob);
@@ -24,4 +27,4 @@ require("../Systems/GiveawaySys")(client);
 ["Events", "Commands"].forEach((handler) => {
   require(`./Handlers/${handler}`)(client, PG, Ascii);
 });
-client.login(TokenDev);
+client.login(TOKEN);

@@ -12,6 +12,7 @@
     "discord-html-transcripts": "^2.2.7",
     "discord.js": "^13.6.0",
     "distube": "^3.3.2",
+    "dotenv": "^16.0.0",
     "ffmpeg-static": "^4.4.1",
     "glob": "^7.2.0",
     "libsodium-wrappers": "^0.7.9",
@@ -24,7 +25,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "pm2 start . --watch"
+    "dev": "pm2 start . --watch",
+    "start": "node .",
+    "production": "NODE_ENV=production&&npm start",
+    "development": "set NODE_ENV=development&&npm start"
   },
   "author": "SorrowInRain",
   "license": "MIT"

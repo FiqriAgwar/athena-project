@@ -31,19 +31,17 @@ module.exports = {
         content: `The data for this system is outdated.`,
       });
 
-    if (
-      !member.roles.cache.find((role) => {
-        console.log(
-          role.id,
-          TicketSetup.Handlers,
-          role.id == TicketSetup.Handlers
-        );
-        role.id == TicketSetup.Handlers;
-      })
-    ) {
+    let validHandler = false;
+    member.roles.cache.forEach((role) => {
+      if (role.id === TicketSetup.Handlers) {
+        validHandler = true;
+      }
+    });
+
+    if (!validHandler) {
       return interaction.reply({
         content: "You can't use this button.",
-        ephermal: true,
+        ephemeral: true,
       });
     }
 
@@ -55,7 +53,7 @@ module.exports = {
         return channel.send({
           content:
             "No data was found related to this ticket. Please delete this channel manually.",
-          ephermal: true,
+          ephemeral: true,
         });
 
       switch (customId) {
@@ -63,7 +61,7 @@ module.exports = {
           if (data.Locked) {
             return channel.send({
               content: "The ticket is already locked.",
-              ephermal: true,
+              ephemeral: true,
             });
           }
 
@@ -83,7 +81,7 @@ module.exports = {
           if (!data.Locked) {
             return channel.send({
               content: "The ticket is already unlocked.",
-              ephermal: true,
+              ephemeral: true,
             });
           }
 
@@ -103,7 +101,7 @@ module.exports = {
             return channel.send({
               content:
                 "The ticket is already closed. Please wait for a moment until it is deleted.",
-              ephermal: true,
+              ephemeral: true,
             });
           }
 
@@ -144,7 +142,7 @@ module.exports = {
           if (data.Claimed) {
             return interaction.reply({
               content: `This ticket has already claimed by <@${data.ClaimedBy}>`,
-              ephermal: true,
+              ephemeral: true,
             });
           }
 

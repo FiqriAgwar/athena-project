@@ -1,7 +1,7 @@
 {
-  "name": "rawrsoda-bot",
-  "version": "0.0.1",
-  "description": "Fun bot for Rawrsoda Media",
+  "name": "athena-project",
+  "version": "0.1.0",
+  "description": "Bot for moderation",
   "main": "./Structures/index.js",
   "dependencies": {
     "@distube/spotify": "^1.2.1",

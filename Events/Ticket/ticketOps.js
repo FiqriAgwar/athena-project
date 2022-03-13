@@ -33,13 +33,19 @@ module.exports = {
 
     if (
       !member.roles.cache.find((role) => {
-        role.id === TicketSetup.Handlers;
+        console.log(
+          role.id,
+          TicketSetup.Handlers,
+          role.id == TicketSetup.Handlers
+        );
+        role.id == TicketSetup.Handlers;
       })
-    )
-      return channel.send({
+    ) {
+      return interaction.reply({
         content: "You can't use this button.",
         ephermal: true,
       });
+    }
 
     const Embed = new MessageEmbed().setColor("DARK_BLUE");
 

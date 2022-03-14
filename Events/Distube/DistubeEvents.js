@@ -13,7 +13,7 @@ const status = (queue) =>
   }\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\``;
 
 client.distube
-  .on("playSong", (queue, song) =>
+  .on("playSong", (queue, song) => {
     queue.textChannel.send({
       embeds: [
         new MessageEmbed()
@@ -24,8 +24,10 @@ client.distube
           )
           .setColor("GREEN"),
       ],
-    })
-  )
+    });
+
+    // client.user.setActivity(`${song.name}`, { type: "LISTENING" });
+  })
   .on("addSong", (queue, song) =>
     queue.textChannel.send({
       embeds: [

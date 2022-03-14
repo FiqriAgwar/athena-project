@@ -26,7 +26,7 @@ client.distube
       ],
     });
 
-    client.user.setActivity(`${song.name}`, { type: "LISTENING" });
+    // client.user.setActivity(`${song.name}`, { type: "LISTENING" });
   })
   .on("addSong", (queue, song) =>
     queue.textChannel.send({

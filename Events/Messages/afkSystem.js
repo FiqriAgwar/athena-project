@@ -77,6 +77,19 @@ module.exports = {
           }
         );
       });
+
+      if (AFKList.length > 0) {
+        const Embed = new MessageEmbed().setColor("RED");
+
+        Embed.setDescription(
+          `One or more people that you mentioned by username is going AFK.`
+        );
+        Embed.addField(`Member: `, AFKList.join("\n"), true);
+        Embed.addField(`Since: `, Time.join("\n"), true);
+        Embed.addField(`Reason: `, Status.join("\n"), true);
+
+        message.reply({ embeds: [Embed], ephemeral: true });
+      }
     }
   },
 };

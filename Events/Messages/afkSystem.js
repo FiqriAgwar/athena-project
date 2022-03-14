@@ -17,13 +17,15 @@ module.exports = {
       UserId: message.author.id,
     });
 
-    let AFKList = [];
-    let Time = [];
-    let Status = [];
+    console.log(message.mentions);
 
-    if (message.mentions.roles.size) {
+    if (message.mentions.roles.size || message.mentions.members.size) {
       message.mentions.roles.forEach((role) => {
         if (role.members.size) {
+          let AFKList = [];
+          let Time = [];
+          let Status = [];
+
           role.members.forEach((member) => {
             DB.findOne(
               { GuildId: message.guild.id, UserId: member.id },
@@ -36,14 +38,29 @@ module.exports = {
                     Status.push(data.Status);
                   }
                 }
+
+                if (AFKList.length > 0) {
+                  const Embed = new MessageEmbed().setColor("RED");
+
+                  Embed.setDescription(
+                    `One or more people that you mentioned by role is going AFK.`
+                  );
+                  Embed.addField(`Member: `, AFKList.join("\n"), true);
+                  Embed.addField(`Since: `, Time.join("\n"), true);
+                  Embed.addField(`Reason: `, Status.join("\n"), true);
+
+                  message.reply({ embeds: [Embed], ephemeral: true });
+                }
               }
             );
           });
         }
       });
-    }
 
-    if (message.mentions.members.size) {
+      let AFKList = [];
+      let Time = [];
+      let Status = [];
+
       message.mentions.members.forEach((member) => {
         DB.findOne(
           { GuildId: message.guild.id, UserId: member.id },
@@ -59,17 +76,6 @@ module.exports = {
           }
         );
       });
-    }
-
-    if (AFKList.length > 0) {
-      const Embed = new MessageEmbed().setColor("RED");
-
-      Embed.setDescription(`One or more people in this list is going AFK.`);
-      Embed.addField(`Member: `, AFKList.join("\n"), true);
-      Embed.addField(`Since: `, Time.join("\n"), true);
-      Embed.addField(`Reason: `, Status.join("\n"), true);
-
-      return message.reply({ embeds: [Embed], ephemeral: true });
     }
   },
 };

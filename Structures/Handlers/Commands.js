@@ -43,7 +43,7 @@ module.exports = async (client, PG, Ascii) => {
   //-------- PERMISSION CHECK -----------//
   client.on("ready", async () => {
     client.guilds.cache.forEach((g) => {
-      g.commands.set(CommandsArray).then(async (command) => {
+      client.application.commands.set(CommandsArray).then(async (command) => {
         const Roles = (commandName) => {
           const cmdPerms = CommandsArray.find(
             (c) => c.name === commandName
@@ -64,7 +64,7 @@ module.exports = async (client, PG, Ascii) => {
           return [...accumulator, { id: r.id, permissions }];
         }, []);
 
-        await g.commands.permissions.set({ fullPermissions });
+        await client.application.commands.permissions.set({ fullPermissions });
       });
     });
   });

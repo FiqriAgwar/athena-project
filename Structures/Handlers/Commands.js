@@ -42,7 +42,6 @@ module.exports = async (client, PG, Ascii) => {
 
   //-------- PERMISSION CHECK -----------//
   client.on("ready", async () => {
-    client.guilds.cache.forEach((g) => {
       client.application.commands.set(CommandsArray).then(async (command) => {
         const Roles = (commandName) => {
           const cmdPerms = CommandsArray.find(
@@ -50,7 +49,7 @@ module.exports = async (client, PG, Ascii) => {
           ).permission;
           if (!cmdPerms) return null;
 
-          return g.roles.cache.filter((r) => r.permissions.has(cmdPerms));
+          return client.guilds.roles.cache.filter((r) => r.permissions.has(cmdPerms));
         };
 
         const fullPermissions = command.reduce((accumulator, r) => {

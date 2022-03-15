@@ -12,6 +12,7 @@ const Ascii = require("ascii-table");
 
 const client = new Client({ intents: 32767 });
 client.commands = new Collection();
+client.buttons = new Collection();
 
 const { DisTube } = require("distube");
 const { SpotifyPlugin } = require("@distube/spotify");
@@ -26,7 +27,7 @@ module.exports = client;
 
 require("../Systems/GiveawaySys")(client);
 
-["Events", "Commands"].forEach((handler) => {
+["Events", "Commands", "Buttons"].forEach((handler) => {
   require(`./Handlers/${handler}`)(client, PG, Ascii);
 });
 

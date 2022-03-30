@@ -2,9 +2,7 @@ const client = require("../../Structures/index");
 const { MessageEmbed } = require("discord.js");
 
 const status = (queue) =>
-  `Volume: \`${queue.volume}%\` | Filter: \`${
-    queue.filters.join(", ") || "Off"
-  }\` | Loop: \`${
+  `Filter: \`${queue.filters.join(", ") || "Off"}\` | Loop: \`${
     queue.repeatMode
       ? queue.repeatMode === 2
         ? "All Queue"

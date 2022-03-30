@@ -1,7 +1,7 @@
 const { Client } = require("discord.js");
 const mongoose = require("mongoose");
-const Database = process.env.DATABASE;
-// const { Database } = require("../../Structures/config.json");
+// const Database = process.env.DATABASE;
+const { Database } = require("../../Structures/config.json");
 
 module.exports = {
   name: "ready",

@@ -45,6 +45,7 @@ module.exports = async (client, PG, Ascii) => {
     client.guilds.cache.forEach((g) => {
       // g.commands.set([]);
       // g.commands.set(CommandsArray).then(async (command) => {
+      client.application.commands.set([]);
       client.application.commands.set(CommandsArray).then(async (command) => {
         const Roles = (commandName) => {
           const cmdPerms = CommandsArray.find(

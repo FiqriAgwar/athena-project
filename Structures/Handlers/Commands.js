@@ -43,9 +43,9 @@ module.exports = async (client, PG, Ascii) => {
   //-------- PERMISSION CHECK -----------//
   client.on("ready", async () => {
     client.guilds.cache.forEach((g) => {
-      // g.commands.set([]);
+      g.commands.set([]);
       // g.commands.set(CommandsArray).then(async (command) => {
-      client.application.commands.set([]);
+      // client.application.commands.set([]); //DANGEROUS! DON'T TOUCH
       client.application.commands.set(CommandsArray).then(async (command) => {
         const Roles = (commandName) => {
           const cmdPerms = CommandsArray.find(

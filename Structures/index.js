@@ -1,9 +1,9 @@
 const { Client, Collection } = require("discord.js");
 
 require("dotenv").config();
-// const TOKEN = process.env.TOKEN;
+const TOKEN = process.env.TOKEN;
 
-const { TOKEN } = require("./config.json");
+// const { TOKEN } = require("./config.json");
 
 const { promisify } = require("util");
 const { glob } = require("glob");

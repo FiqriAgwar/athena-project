@@ -6,7 +6,7 @@
   "dependencies": {
     "@distube/spotify": "^1.2.1",
     "ascii-table": "^0.0.9",
-    "axios": "^0.19.2",
+    "axios": "^0.21.2",
     "canvas": "^2.9.0",
     "discord-giveaways": "^5.1.1",
     "discord-html-transcripts": "^2.2.7",

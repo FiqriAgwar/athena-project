@@ -13,15 +13,16 @@ module.exports = {
       return;
     }
 
+    const { guildId, customId, message } = interaction;
+
+    if (!["suggest-accept", "suggest-deny"].includes(customId)) return;
+
     if (!interaction.member.permissions.has("ADMINISTRATOR")) {
       return interaction.reply({
         content: "You can not use this button.",
         ephemeral: true,
       });
     }
-    const { guildId, customId, message } = interaction;
-
-    if (!["suggest-accept", "suggest-deny"].includes(customId)) return;
 
     DB.findOne(
       { GuildId: guildId, MessageId: message.id },

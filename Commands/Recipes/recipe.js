@@ -26,34 +26,33 @@ module.exports = {
    */
   async execute(interaction, client) {
     const { options } = interaction;
-    const query = options.getString("query").split(" ").join("%20");
+    const queryInput = options.getString("query");
+    const query = queryInput.split(" ").join("%20");
 
     const Response = new MessageEmbed()
       .setFooter({
-        text: `API Powered By: tomorisakura`,
+        text: `API Powered By: tomorisakura | Sponsored By: Kecap Manis Bango | Requested By: ArThreeMis`,
       })
       .setColor("YELLOW")
-      .setAuthor({ name: `Results` });
-
-    const RecipeResponse = new MessageEmbed()
-      .setFooter({
-        text: `API Powered By: tomorisakura`,
-      })
-      .setColor("GREEN");
-
-    const ErrResponse = new MessageEmbed()
-      .setFooter({
-        text: `API Powered By: tomorisakura`,
-      })
-      .setColor("RED");
+      .setAuthor({ name: `Recipes` });
 
     const Buttons = new MessageActionRow();
 
     if (!query) {
       return interaction.reply({
-        embeds: [ErrResponse.setDescription("Please input a valid query.")],
+        embeds: [
+          Response.setDescription("Please input a valid query.").setColor(
+            "RED"
+          ),
+        ],
       });
     }
+
+    interaction.reply({
+      content:
+        "Have fun in cooking! Please wait for around 5 seconds before the list of recipes appears. After that, pick one of the recipes by clicking one of the buttons.",
+      ephemeral: true,
+    });
 
     const recipeArray = await axios({
       method: "get",
@@ -82,7 +81,7 @@ module.exports = {
 
       Response.addField(`List of recipes:`, recipes);
 
-      await interaction.reply({
+      const Message = await interaction.channel.send({
         embeds: [Response],
         components: [Buttons],
       });
@@ -102,18 +101,21 @@ module.exports = {
 
       Collector.on("end", async (collection) => {
         collection.forEach(async (click) => {
-          console.log(click.user.id, click.customId);
-
           if (click.customId) {
             const Recipe = await axios({
               method: "get",
               url: `https://masak-apa-tomorisakura.vercel.app/api/recipe/${click.customId}`,
             });
 
-            RecipeResponse.setDescription(
-              `Recipe by: **${Recipe.data.results.author.user}** at ${Recipe.data.results.author.datePublished}\n
-              ${Recipe.data.results.desc}`
+            Response.fields = [];
+
+            Response.setDescription(
+              `Recipe by: **${Recipe.data.results.author.user}** at ${
+                Recipe.data.results.author.datePublished
+              }\n
+              ${Recipe.data.results.desc.substring(0, 255) + "..."}`
             )
+              .setColor("GREEN")
               .setAuthor({ name: Recipe.data.results.title })
               .setThumbnail(Recipe.data.results.thumb)
               .addFields(
@@ -123,24 +125,24 @@ module.exports = {
                 },
                 {
                   name: `Ingredients`,
-                  value: Recipe.data.results.ingredient.join("\u200b"),
+                  value: Recipe.data.results.ingredient.join("\n"),
                 },
                 {
                   name: `Steps`,
-                  value: Recipe.data.results.step.join("\u200b"),
+                  value: Recipe.data.results.step.join("\n"),
                 }
               );
 
-            return interaction.editReply({
-              embeds: [RecipeResponse],
+            Message.edit({
+              embeds: [Response],
               components: [],
             });
           } else {
             return interaction.editReply({
               embeds: [
-                ErrResponse.setDescription(
+                Response.setDescription(
                   "An error occured when connecting to Discord API."
-                ),
+                ).setColor("RED"),
               ],
               components: [],
             });
@@ -148,10 +150,12 @@ module.exports = {
         });
       });
     } else {
-      return interaction.reply({
-        embeds: Response.setDescription(
-          `No recipes exist in query: **${query}**.`
-        ),
+      return interaction.editReply({
+        embeds: [
+          Response.setDescription(
+            `No recipes exist in query: **${queryInput}**.`
+          ),
+        ],
       });
     }
   },

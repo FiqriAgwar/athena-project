@@ -4,15 +4,7 @@ const moment = require("moment");
 
 module.exports = {
   name: "praytime",
-  description: "Prayer time for a certain location.",
-  options: [
-    {
-      name: "city",
-      description: "City that you want to know about prayer time.",
-      type: "STRING",
-      required: true,
-    },
-  ],
+  description: "Prayer time for Bandung.",
 
   /**
    *
@@ -29,12 +21,12 @@ module.exports = {
       })
       .setColor("GREEN");
 
-    interaction.reply({ content: "*Connecting to API...*" });
+    await interaction.reply({ content: "*Connecting to API...*" });
 
     try {
       const result = await axios({
         method: "get",
-        url: `https://api.pray.zone/v2/times/today.json?city=${city}`,
+        url: `https://api.pray.zone/v2/times/today.json?city=bandung`,
       });
 
       if (!result) {
@@ -84,6 +76,7 @@ module.exports = {
         embeds: [Response],
       });
     } catch (err) {
+      console.log(err);
       Response.setDescription(err.toString()).setColor("RED");
       return interaction.editReply({ content: "Error!", embeds: [Response] });
     }

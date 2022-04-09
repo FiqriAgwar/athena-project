@@ -21,22 +21,17 @@ module.exports = {
 
     Embed.addFields(
       {
+        name: `v2.5 (April 09, 2022)`,
+        value: `🟢 Added \`/role\` with options \`/role setup\`, \`/role add\` and \`/role remove\` for giving a role to someone.\n*Automated role system (and free) is really necessary for a good server.*`,
+      },
+      {
+        name: `v2.4 (April 04, 2022)`,
+        value: `🟢 Added \`/praytime\` for praying time in Bandung.\n*Currenly limited to Bandung only to avoid 500 Error.*`,
+      },
+      {
         name: `v2.3 (April 01, 2022)`,
         value: `🟢 Added \`/recipe\` to find your favorite recipe around Indonesia.\n*Indomie is excluded.*\n
         🟢 Added \`/changelog\`\n*To know what feature is updated.*`,
-      },
-      {
-        name: `v2.2 (March 31, 2022)`,
-        value: `🟢 Added \`/quran\` for your better Ramadhan experience.\n*Happy Ramadhan!*`,
-      },
-      {
-        name: `v2.1 (March 30, 2022)`,
-        value: `🟡 Changed \`/music play\` and \`/music options\` to \`/play\` and \`/music\`.\n*I realize that it is difficult for new user to use the new slash command.*\n
-      🔴 Removed \`/music volume\`.\n*You can change the volume in the user volume slider. This feature is useless right now.*`,
-      },
-      {
-        name: `v2.0 (March 20, 2022)`,
-        value: `🟢 Added \`/nick\` with options \`/nick set\` and \`/nick view\` for nicknaming someone in the same guild.\n*Confused by a new user that just join? Add a nickname and never forget who it is.*`,
       }
     );
 

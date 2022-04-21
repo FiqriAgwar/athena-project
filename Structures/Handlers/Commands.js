@@ -42,7 +42,7 @@ module.exports = async (client, PG, Ascii) => {
 
   //-------- PERMISSION CHECK -----------//
   client.on("ready", async () => {
-    // client.application.commands.set([]); //DANGEROUS! DON'T TOUCH
+    client.application.commands.set([]); //DANGEROUS! DON'T TOUCH
     client.guilds.cache.forEach((g) => {
       // g.commands.set([]);
 

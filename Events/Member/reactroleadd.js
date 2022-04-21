@@ -37,7 +37,10 @@ module.exports = {
     const roles = roleDB.Roles;
 
     roles.forEach(async (role) => {
-      if (role.Emoji == `<:${reaction.emoji.identifier}>`) {
+      if (
+        role.Emoji == `<:${reaction.emoji.identifier}>` ||
+        role.Emoji == reaction.emoji.name
+      ) {
         const roleAdd = reaction.message.guild.roles.cache.find(
           (r) => r.id === role.RoleId
         );

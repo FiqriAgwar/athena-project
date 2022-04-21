@@ -10,6 +10,7 @@ module.exports = {
    * @param {Client} client;
    */
   async execute(message, client) {
+    if (!message.author) return;
     if (message.author.bot) return;
 
     const LoggerGuild = await DBLogger.findOne({ GuildId: message.guildId });

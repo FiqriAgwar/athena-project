@@ -11,6 +11,7 @@ module.exports = {
    * @param {Client} client
    */
   async execute(oldMessage, newMessage, client) {
+    if (!oldMessage.author) return;
     if (oldMessage.author.bot) return;
 
     if (oldMessage.content === newMessage.content) return;

@@ -37,7 +37,9 @@
   <p align="center">
     Open source discord bot project for moderation, music, fun games and others.
     <br />
-    <a href="https://github.com/SorrowInRain/athena-project/wiki"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/SorrowInRain/athena-project/wiki"><strong>Explore the docs</strong></a>
+    ·
+    <a href="https://discord.com/api/oauth2/authorize?client_id=952487249939947530&permissions=8&scope=bot%20applications.commands"><strong>Invite Minerva</strong></a>
     <br />
     <br />
     <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>

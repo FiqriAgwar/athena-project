@@ -15,6 +15,7 @@ const client = new Client({
   partials: ["MESSAGE", "CHANNEL", "REACTION", "GUILD_MEMBER", "USER"],
 });
 client.commands = new Collection();
+client.helps = [];
 client.buttons = new Collection();
 
 const { DisTube } = require("distube");

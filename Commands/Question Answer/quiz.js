@@ -163,6 +163,9 @@ module.exports = {
     interaction.reply({
       content:
         `Big brain time! Creating a quiz for you...`,
+      embeds: [
+        Response.setColor("GREEN"),
+      ],
     });
 
     // Create the API request
@@ -241,12 +244,12 @@ module.exports = {
         // Get winner if any
         if (filtered_ans.size > 0) {
           const winner = filtered_ans.first().author
-          interaction.channel.send({
+          interaction.followUp({
             content:
             `Congratulations <@${winner.id}>! You won the quiz!!`
           })
         } else {
-          interaction.channel.send({
+          interaction.followUp({
             content:
             `No one got it correct... The answer was ${correctAnswer}`
           })

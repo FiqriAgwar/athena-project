@@ -35,6 +35,78 @@ module.exports = {
           name: "Television",
           value: "14",
         },
+        {
+          name: "Video Games",
+          value: "15",
+        },
+        {
+          name: "Board Games",
+          value: "16",
+        },
+        {
+          name: "Science & Nature",
+          value: "17",
+        },
+        {
+          name: "Computers & Informatics",
+          value: "18",
+        },
+        {
+          name: "Mathematics",
+          value: "19",
+        },
+        {
+          name: "Mythology",
+          value: "20",
+        },
+        {
+          name: "Sports",
+          value: "21",
+        },
+        {
+          name: "Geography",
+          value: "22",
+        },
+        {
+          name: "History",
+          value: "23",
+        },
+        {
+          name: "Politics",
+          value: "24",
+        },
+        {
+          name: "Art",
+          value: "25",
+        },
+        {
+          name: "Celebrities",
+          value: "26",
+        },
+        {
+          name: "Animals",
+          value: "27",
+        },
+        {
+          name: "Vehicles",
+          value: "28",
+        },
+        {
+          name: "Western Comics",
+          value: "29",
+        },
+        {
+          name: "Tech: Gadgets",
+          value: "30",
+        },
+        {
+          name: "Anime & Manga",
+          value: "31",
+        },
+        {
+          name: "Cartoons",
+          value: "32",
+        },
       ],
     },
     {
@@ -77,7 +149,7 @@ module.exports = {
       .setAuthor({ name: `Quizzes` });
 
     // Check if the variables are correct
-    if (!(parseInt(topic) >= 9 && parseInt(topic) <= 14 && ["easy", "medium", "hard"].includes(difficulty))) {
+    if (!(parseInt(topic) >= 9 && parseInt(topic) <= 32 && ["easy", "medium", "hard"].includes(difficulty))) {
       console.log(topic, difficulty)
       return interaction.reply({
         embeds: [
@@ -165,7 +237,7 @@ module.exports = {
         .filter((message) => {
           return message.content.toUpperCase() === correctAnswer.toUpperCase()
         })
-        
+
         // Get winner if any
         if (filtered_ans.size > 0) {
           const winner = filtered_ans.first().author

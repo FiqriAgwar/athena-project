@@ -175,7 +175,7 @@ module.exports = {
       const question = quizContent.data.results[0].question
       const answers = quizContent.data.results[0].incorrect_answers
       const correctAnswer = quizContent.data.results[0].correct_answer
-      console.log(correctAnswer);
+      // console.log(correctAnswer);
       // Check validity of response
       if (question == undefined || answers == undefined || correctAnswer == undefined) {
         console.log(quizContent.data)

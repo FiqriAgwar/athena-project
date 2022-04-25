@@ -4,6 +4,7 @@ module.exports = model(
   "UserLevel",
   new Schema({
     UserId: String,
+    GuildId: String,
     Experience: {
       type: Number,
       default: 0,
@@ -18,7 +19,8 @@ module.exports = model(
     },
     PPMeasure: {
       type: Number,
-      default: 0,
+      default: 1,
     },
+    IsPremium: Boolean,
   })
 );

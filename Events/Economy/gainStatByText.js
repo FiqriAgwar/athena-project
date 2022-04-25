@@ -22,13 +22,15 @@ module.exports = {
     Exp += stickers.size; //sticker
     Exp += attachments.size; //pic, vid, etc.
 
-    const coin = Math.ceil(Math.random() * Exp) + 10;
+    const coin = Math.ceil(Math.random() * Exp) + 1;
 
-    const Player = await UserDB.findOne({ UserId: author.id });
+    const Player = await UserDB.findOne({
+      UserId: author.id,
+      GuildId: guild.id,
+    });
     const channel = await client.channels.cache.get(LoggerChannel);
 
     if (!Player) {
-      const Guild = [{ GuildId: guild.id, Experience: Exp }];
       let startLevel = 0; //start variable for new user
       let displayExp = Exp;
       let neededExp = 1;
@@ -40,11 +42,12 @@ module.exports = {
 
       await UserDB.create({
         UserId: author.id,
+        GuildId: guild.id,
         Experience: Exp,
         Level: startLevel,
-        Guilds: Guild,
         Coin: coin,
         PPMeasure: 0,
+        IsPremium: false,
       });
 
       if (!channel) return;
@@ -60,7 +63,7 @@ module.exports = {
           { name: `Username`, value: author.tag, inline: true },
           { name: `ID`, value: author.id, inline: true },
           {
-            name: `Starter Guild`,
+            name: `Guild`,
             value: `${guild.name}\n${guild.id}`,
             inline: true,
           },
@@ -75,7 +78,7 @@ module.exports = {
       let levelUp = 0;
 
       Player.Experience += Exp;
-      Player.Coin += coin;
+      Player.Coin += coin * (Player.IsPremium ? 1 : 1.5);
 
       while (Player.Experience >= nextXP) {
         Player.Level += 1;
@@ -98,7 +101,12 @@ module.exports = {
           .setThumbnail(author.displayAvatarURL({ dynamic: true }))
           .addFields(
             { name: `Username`, value: author.tag, inline: true },
-            { name: `ID`, value: author.id, inline: false },
+            { name: `ID`, value: author.id, inline: true },
+            {
+              name: `Guild`,
+              value: `${guild.name}\n${guild.id}`,
+              inline: true,
+            },
             { name: `Current Level`, value: `${Player.Level}`, inline: true },
             {
               name: `Exp.`,

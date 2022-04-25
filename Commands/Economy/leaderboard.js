@@ -2,7 +2,7 @@ const { CommandInteraction, MessageEmbed, Client } = require("discord.js");
 const UserDB = require("../../Structures/Schemas/UserLevelling");
 
 module.exports = {
-  name: "rank",
+  name: "leaderboard",
   description: "Leaderboard of this server, based on EXP, Coin or even more.",
   options: [
     {
@@ -44,16 +44,17 @@ module.exports = {
       })
       .setColor("RANDOM");
 
-    let rank,
-      userlist,
-      valuelist = [];
-
+    let rank = [];
+    let valuelist = [];
+    let userlist = [];
     let valueUnit = "";
 
     switch (type) {
       case "xp":
         {
           valueUnit = "Experience";
+          Embed.setColor("BLUE");
+
           const Players = await UserDB.find({ GuildId: guild.id })
             .sort({ Experience: -1 })
             .limit(10);
@@ -84,6 +85,8 @@ module.exports = {
       case "coin":
         {
           valueUnit = "Coin";
+          Embed.setColor("GOLD");
+
           const Players = await UserDB.find({ GuildId: guild.id })
             .sort({ Coin: -1 })
             .limit(10);
@@ -109,6 +112,8 @@ module.exports = {
       case "ppl":
         {
           valueUnit = "Length";
+          Embed.setColor("DARK_VIVID_PINK");
+
           const Players = await UserDB.find({ GuildId: guild.id })
             .sort({ Coin: -1 })
             .limit(10);

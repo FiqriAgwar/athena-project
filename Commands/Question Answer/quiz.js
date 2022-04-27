@@ -1,5 +1,6 @@
 const { CommandInteraction, MessageEmbed } = require("discord.js");
 const axios = require("axios");
+const he = require("he")
 
 module.exports = {
   name: "quiz",
@@ -8,104 +9,104 @@ module.exports = {
     {
       name: "topic",
       description: "Select a topic.",
-      type: "STRING",
+      type: "NUMBER",
       required: true,
       choices: [
         {
           name: "General Knowledge",
-          value: "9",
+          value: 9,
         },
         {
           name: "Books",
-          value: "10",
+          value: 10,
         },
         {
           name: "Film",
-          value: "11",
+          value: 11,
         },
         {
           name: "Music",
-          value: "12",
+          value: 12,
         },
         {
           name: "Musicals & Theaters",
-          value: "13",
+          value: 13,
         },
         {
           name: "Television",
-          value: "14",
+          value: 14,
         },
         {
           name: "Video Games",
-          value: "15",
+          value: 15,
         },
         {
           name: "Board Games",
-          value: "16",
+          value: 16,
         },
         {
           name: "Science & Nature",
-          value: "17",
+          value: 17,
         },
         {
           name: "Computers & Informatics",
-          value: "18",
+          value: 18,
         },
         {
           name: "Mathematics",
-          value: "19",
+          value: 19,
         },
         {
           name: "Mythology",
-          value: "20",
+          value: 20,
         },
         {
           name: "Sports",
-          value: "21",
+          value: 21,
         },
         {
           name: "Geography",
-          value: "22",
+          value: 22,
         },
         {
           name: "History",
-          value: "23",
+          value: 23,
         },
         {
           name: "Politics",
-          value: "24",
+          value: 24,
         },
         {
           name: "Art",
-          value: "25",
+          value: 25,
         },
         {
           name: "Celebrities",
-          value: "26",
+          value: 26,
         },
         {
           name: "Animals",
-          value: "27",
+          value: 27,
         },
         {
           name: "Vehicles",
-          value: "28",
+          value: 28,
         },
         {
           name: "Western Comics",
-          value: "29",
+          value: 29,
         },
         {
           name: "Tech: Gadgets",
-          value: "30",
+          value: 30,
         },
         {
           name: "Anime & Manga",
-          value: "31",
+          value: 31,
         },
         {
           name: "Cartoons",
-          value: "32",
+          value: 32,
         },
       ],
     },
@@ -137,7 +138,7 @@ module.exports = {
    */
   async execute(interaction) {
     const { options, user } = interaction;
-    const topic = options.getString("topic");
+    const topic = options.getNumber("topic");
     const difficulty = options.getString("difficulty");
 
     // Basic metadata
@@ -149,7 +150,7 @@ module.exports = {
       .setAuthor({ name: `Quizzes` });
 
     // Check if the variables are correct
-    if (!(parseInt(topic) >= 9 && parseInt(topic) <= 32 && ["easy", "medium", "hard"].includes(difficulty))) {
+    if (!(topic >= 9 && topic <= 32 && ["easy", "medium", "hard"].includes(difficulty))) {
       console.log(topic, difficulty)
       return interaction.reply({
         embeds: [
@@ -175,9 +176,10 @@ module.exports = {
     });
 
     if (quizContent.status == 200 && quizContent.data.response_code == 0) {
-      const question = quizContent.data.results[0].question
-      const answers = quizContent.data.results[0].incorrect_answers
-      const correctAnswer = quizContent.data.results[0].correct_answer
+      var question = quizContent.data.results[0].question
+      var answers = quizContent.data.results[0].incorrect_answers
+      var correctAnswer = quizContent.data.results[0].correct_answer
+      
       // console.log(correctAnswer);
       // Check validity of response
       if (question == undefined || answers == undefined || correctAnswer == undefined) {
@@ -205,6 +207,11 @@ module.exports = {
           ],
         })
       }
+
+      // Decode encoded html
+      question = he.decode(question)
+      answers = answers.map((x) => he.decode(x))
+      correctAnswer = he.decode(correctAnswer)
 
       answers.push(correctAnswer)
       // Scramble array

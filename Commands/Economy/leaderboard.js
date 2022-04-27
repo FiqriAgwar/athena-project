@@ -1,4 +1,5 @@
 const { CommandInteraction, MessageEmbed, Client } = require("discord.js");
+const ms = require("ms");
 const UserDB = require("../../Structures/Schemas/UserLevelling");
 
 module.exports = {
@@ -22,6 +23,14 @@ module.exports = {
         {
           name: "PP Length",
           value: "ppl",
+        },
+        {
+          name: "Message Sent",
+          value: "msg",
+        },
+        {
+          name: "Voice Activity",
+          value: "va",
         },
       ],
     },
@@ -154,6 +163,94 @@ module.exports = {
           });
         }
         break;
+      case "msg":
+        {
+          valueUnit = "Words Sent (Message Sent)";
+          Embed.setColor("DARK_GREEN");
+
+          const Players = await UserDB.find({ GuildId: guild.id })
+            .sort({ WordCount: -1 })
+            .limit(10);
+
+          if (!Players)
+            return interaction.reply({
+              embeds: [
+                Embed.setDescription("There is no player in this server."),
+              ],
+            });
+
+          Players.forEach((Player) => {
+            rank.push(rank.length + 1);
+            userlist.push(`<@${Player.UserId}>`);
+          });
+
+          Players.forEach((Player) => {
+            valuelist.push(
+              `\`${Player.WordCount.toString()} (${Player.Message.toString()})\``
+            );
+          });
+        }
+        break;
+      case "va": {
+        valueUnit = "Time Spent";
+        Embed.setColor("DARK_RED");
+
+        const Players = await UserDB.find({ GuildId: guild.id })
+          .sort({ Time: -1 })
+          .limit(10);
+
+        if (!Players)
+          return interaction.reply({
+            embeds: [
+              Embed.setDescription("There is no player in this server."),
+            ],
+          });
+
+        Players.forEach((Player) => {
+          rank.push(rank.length + 1);
+          userlist.push(`<@${Player.UserId}>`);
+        });
+
+        Players.forEach((Player) => {
+          let time = Player.Time;
+          let timeValue = "";
+
+          if (Math.floor(time / 86400000) > 0) {
+            timeValue += `${Math.floor(time / 86400000)} day${
+              time / 86400000 >= 2 ? "s " : " "
+            }`;
+
+            time %= 86400000;
+          }
+
+          if (Math.floor(time / 3600000) > 0) {
+            timeValue += `${Math.floor(time / 3600000)} hour${
+              time / 3600000 >= 2 ? "s " : " "
+            }`;
+
+            time %= 3600000;
+          }
+
+          if (Math.floor(time / 60000) > 0) {
+            timeValue += `${Math.floor(time / 60000)} minute${
+              time / 60000 >= 2 ? "s " : " "
+            }`;
+
+            time %= 60000;
+          }
+
+          if (Math.floor(time / 1000) > 0) {
+            timeValue += `${Math.floor(time / 1000)} second${
+              time / 1000 >= 2 ? "s " : " "
+            }`;
+
+            time %= 1000;
+          }
+
+          timeValue += `${time} ms`;
+          valuelist.push(`\`${timeValue}\``);
+        });
+      }
     }
 
     Embed.addFields(

@@ -22,5 +22,11 @@ module.exports = model(
       default: 1,
     },
     IsPremium: Boolean,
+    Time: Number,
+    JoinCount: Number,
+    Message: Number,
+    WordCount: Number,
+    StickerCount: Number,
+    AttachmentCount: Number,
   })
 );

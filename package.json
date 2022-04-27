@@ -12,6 +12,7 @@
     "discord-html-transcripts": "^2.2.7",
     "discord.js": "^13.6.0",
     "distube": "^3.3.2",
+    "djs-voice": "^1.2.0",
     "dotenv": "^16.0.0",
     "ffmpeg-static": "^4.4.1",
     "glob": "^7.2.0",

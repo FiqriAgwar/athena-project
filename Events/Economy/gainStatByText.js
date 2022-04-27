@@ -22,7 +22,7 @@ module.exports = {
     Exp += stickers.size; //sticker
     Exp += attachments.size; //pic, vid, etc.
 
-    const coin = Math.ceil(Math.random() * Exp) + 1;
+    const coin = Exp * 10 + Math.ceil(Math.random() * 10);
 
     const Player = await UserDB.findOne({
       UserId: author.id,
@@ -48,6 +48,10 @@ module.exports = {
         Coin: coin,
         PPMeasure: 0,
         IsPremium: false,
+        Message: 1,
+        WordCount: words.length,
+        StickerCount: stickers.size,
+        AttachmentCount: attachments.size,
       });
 
       if (!channel) return;
@@ -57,6 +61,7 @@ module.exports = {
           name: "New Player has been registered",
           iconURL: client.user.displayAvatarURL({ dynamic: true }),
         })
+        .setTitle("Text Channel Activation")
         .setColor("AQUA")
         .setThumbnail(author.displayAvatarURL({ dynamic: true }))
         .addFields(
@@ -74,11 +79,16 @@ module.exports = {
 
       await channel.send({ embeds: [NewPlayerEmbed] });
     } else {
-      let nextXP = ((Player.Level * (Player.Level + 1)) / 2) * 10 + 1;
-      let levelUp = 0;
+      Player.Message += 1;
+      Player.WordCount += words.length;
+      Player.StickerCount += stickers.size;
+      Player.AttachmentCount += attachments.size;
 
       Player.Experience += Exp;
-      Player.Coin += coin * (Player.IsPremium ? 1 : 1.5);
+      Player.Coin += Math.floor(coin * (Player.IsPremium ? 1 : 1.5));
+
+      let nextXP = ((Player.Level * (Player.Level + 1)) / 2) * 10 + 1;
+      let levelUp = 0;
 
       while (Player.Experience >= nextXP) {
         Player.Level += 1;
@@ -86,7 +96,7 @@ module.exports = {
         levelUp += 1;
       }
 
-      const neededXP = (Player.Level + 1) * 10;
+      const neededXP = Player.Level * 10;
       const currentXP = neededXP - (nextXP - Player.Experience);
 
       await Player.save();
@@ -97,6 +107,7 @@ module.exports = {
             name: `Player has been leveled up by ${levelUp}`,
             iconURL: client.user.displayAvatarURL({ dynamic: true }),
           })
+          .setTitle("Text Channel Level Up")
           .setColor("GREEN")
           .setThumbnail(author.displayAvatarURL({ dynamic: true }))
           .addFields(

@@ -2,6 +2,7 @@ const { Client, Collection } = require("discord.js");
 
 require("dotenv").config();
 const TOKEN = process.env.TOKEN;
+const Database = process.env.DATABASE;
 
 // const { TOKEN } = require("./config.json");
 
@@ -27,6 +28,7 @@ client.distube = new DisTube(client, {
   emitAddSongWhenCreatingQueue: false,
   plugins: [new SpotifyPlugin()],
 });
+
 module.exports = client;
 
 require("../Systems/GiveawaySys")(client);

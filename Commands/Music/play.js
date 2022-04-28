@@ -44,7 +44,7 @@ module.exports = {
       .reply({
         embeds: [
           new MessageEmbed()
-            .setTitle(`<:Play:944845462790344775> | Request Recvied!`)
+            .setTitle(`<:Play:944845462790344775> | Request Recieved!`)
             .setColor("GREEN")
             .setTimestamp(),
         ],

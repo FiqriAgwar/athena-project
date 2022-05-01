@@ -29,7 +29,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/SorrowInRain/athena-project">
-    <img src="https://cdn.discordapp.com/attachments/952885251905044490/967570099923992646/Athena_Project-logos_white.png" alt="Logo" width="600" height="210">
+    <img src="https://cdn.discordapp.com/attachments/736417890755936357/970315145739911198/minerva2.png" alt="Logo" width="600" height="210">
   </a>
   <br />
   <sub><sup><i>Can't see the picture? Try <a href="https://github.com/settings/appearance">dark mode</a></i></sup></sub>

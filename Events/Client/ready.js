@@ -2,8 +2,6 @@ const { Client, MessageEmbed } = require("discord.js");
 const mongoose = require("mongoose");
 const Database = process.env.DATABASE;
 const AnnDB = require("../../Structures/Schemas/ScheduledAnnounce");
-const Schedule = require("node-schedule");
-const { schedule } = require("node-cron");
 // const { Database } = require("../../Structures/config.json");
 
 module.exports = {
@@ -42,7 +40,7 @@ module.exports = {
 
         announcement.forEach((ann) => {
           try {
-            Schedule.scheduleJob(ann.Schedule, async () => {
+            client.scheduler.scheduleJob(ann.Schedule, async () => {
               client.guilds.cache.forEach((g) => {
                 if (!g.systemChannel) return;
 

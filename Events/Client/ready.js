@@ -54,7 +54,8 @@ module.exports = {
                         }),
                       })
                       .setTitle(ann.Title)
-                      .setDescription(ann.Content),
+                      .setDescription(ann.Content)
+                      .setColor("PURPLE"),
                   ],
                 });
               });

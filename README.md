@@ -45,7 +45,7 @@
     or
     <br />
     <br />
-    <img src="https://cdn.discordapp.com/attachments/952885251905044490/967200128924524585/minerva-normal.jpg" alt="Logo" width="80" height="80">
+    <img src="https://cdn.discordapp.com/attachments/736417890755936357/970315145739911198/minerva2.png" alt="Logo" width="80" height="80">
     <br />
     <a href="https://discord.com/api/oauth2/authorize?client_id=952487249939947530&permissions=8&scope=bot%20applications.commands"><strong>Invite Minerva</strong></a>
     <br />

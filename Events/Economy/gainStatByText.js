@@ -52,6 +52,12 @@ module.exports = {
         WordCount: words.length,
         StickerCount: stickers.size,
         AttachmentCount: attachments.size,
+        Time: 0,
+        JoinCount: 0,
+        Message: 0,
+        WordCount: 0,
+        StickerCount: 0,
+        AttachmentCount: 0,
       });
 
       if (!channel) return;

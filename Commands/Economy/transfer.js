@@ -54,6 +54,12 @@ module.exports = {
         Coin: 0,
         PPMeasure: 1,
         IsPremium: false,
+        Time: 0,
+        JoinCount: 0,
+        Message: 0,
+        WordCount: 0,
+        StickerCount: 0,
+        AttachmentCount: 0,
       });
 
       return interaction.reply({

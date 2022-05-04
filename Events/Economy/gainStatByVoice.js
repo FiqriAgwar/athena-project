@@ -54,6 +54,8 @@ module.exports = {
               const Time = Date.now() - timerData.StartTime;
               timerData.delete();
 
+              console.log(Time);
+
               let Exp = Math.floor(Time / oneXPperTime);
 
               const coin = Exp + Math.ceil(Math.random() * 10);

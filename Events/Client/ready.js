@@ -1,6 +1,7 @@
-const { Client } = require("discord.js");
+const { Client, MessageEmbed } = require("discord.js");
 const mongoose = require("mongoose");
 const Database = process.env.DATABASE;
+const AnnDB = require("../../Structures/Schemas/ScheduledAnnounce");
 // const { Database } = require("../../Structures/config.json");
 
 module.exports = {
@@ -31,8 +32,42 @@ module.exports = {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       })
-      .then(() => {
+      .then(async () => {
         console.log("The client is now connected to database.");
+        const announcement = await AnnDB.find({
+          Schedule: { $gte: Date.now() },
+        });
+
+        announcement.forEach((ann) => {
+          try {
+            client.scheduler.scheduleJob(ann.Schedule, async () => {
+              client.guilds.cache.forEach((g) => {
+                if (!g.systemChannel) return;
+
+                g.systemChannel.send({
+                  embeds: [
+                    new MessageEmbed()
+                      .setAuthor({
+                        name: "Announcement from Pantheon",
+                        iconURL: client.user.displayAvatarURL({
+                          dynamic: true,
+                        }),
+                      })
+                      .setTitle(ann.Title)
+                      .setDescription(ann.Content)
+                      .setColor("PURPLE"),
+                  ],
+                });
+              });
+
+              ann.delete();
+            });
+
+            console.log("All announcement has been set.");
+          } catch (err) {
+            console.log(err);
+          }
+        });
       })
       .catch((err) => {
         console.log(err);

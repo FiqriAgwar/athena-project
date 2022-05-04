@@ -52,7 +52,7 @@ module.exports = {
         Experience: 0,
         Level: 0,
         Coin: 0,
-        PPMeasure: 0,
+        PPMeasure: 1,
         IsPremium: false,
       });
 

@@ -74,7 +74,7 @@ module.exports = {
                   Experience: Exp,
                   Level: startLevel,
                   Coin: coin,
-                  PPMeasure: 0,
+                  PPMeasure: 1,
                   IsPremium: false,
                   Time: Time,
                   JoinCount: 1,

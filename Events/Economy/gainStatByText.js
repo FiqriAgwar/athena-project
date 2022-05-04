@@ -46,7 +46,7 @@ module.exports = {
         Experience: Exp,
         Level: startLevel,
         Coin: coin,
-        PPMeasure: 0,
+        PPMeasure: 1,
         IsPremium: false,
         Message: 1,
         WordCount: words.length,

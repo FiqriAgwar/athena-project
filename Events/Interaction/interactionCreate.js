@@ -24,6 +24,15 @@ module.exports = {
           }) && client.commands.delete(interaction.commandName)
         );
 
+      if (
+        command.permission &&
+        !interaction.member.permissions.has(command.permission)
+      ) {
+        return interaction.reply({
+          content: `You do not have the required permission for this command: \`${interaction.commandName}\`.`,
+          ephemeral: true,
+        });
+      }
       command.execute(interaction, client);
     }
   },

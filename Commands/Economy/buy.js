@@ -88,6 +88,7 @@ module.exports = {
       case "pluspp":
         {
           Player.PPMeasure *= 1.2;
+          Player.save();
 
           bg = await Canvas.loadImage(ppPlusURL);
         }

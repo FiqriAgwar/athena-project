@@ -2,8 +2,8 @@ const { CommandInteraction, MessageEmbed, Client } = require("discord.js");
 const UserDB = require("../../Structures/Schemas/UserLevelling");
 
 module.exports = {
-  name: "rank",
-  description: "Know your or your friend's rank and coin",
+  name: "profile",
+  description: "Know your or your friend's profile and coin",
   options: [
     {
       name: "user",

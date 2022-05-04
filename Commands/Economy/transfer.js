@@ -1,5 +1,6 @@
 const { CommandInteraction, MessageEmbed, Client } = require("discord.js");
 const UserDB = require("../../Structures/Schemas/UserLevelling");
+const TrfDB = require("../../Structures/Schemas/Transactions");
 
 module.exports = {
   name: "transfer",
@@ -57,14 +58,14 @@ module.exports = {
 
       return interaction.reply({
         embeds: [
-          Embed.setDescription("You have 0 money on your account.")
+          Embed.setDescription("You have 0 money in your account.")
             .setTitle("Transaction Failed")
             .setColor("RED"),
         ],
       });
     }
 
-    if (amount <= 0 || Player.Coin <= amount) {
+    if (amount <= 0 || Player.Coin < amount) {
       return interaction.reply({
         embeds: [
           Embed.setDescription(
@@ -93,6 +94,13 @@ module.exports = {
 
     Player.Coin -= amount;
     Target.Coin += amount;
+
+    TrfDB.create({
+      GuildID: guild.id,
+      FromId: user.id,
+      ToId: TargetUser.id,
+      Amount: amount,
+    });
 
     Player.save();
     Target.save();

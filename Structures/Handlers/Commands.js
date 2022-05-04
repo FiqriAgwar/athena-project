@@ -70,7 +70,7 @@ module.exports = async (client, PG, Ascii) => {
           return [...accumulator, { id: r.id, permissions }];
         }, []);
 
-        await g.commands.permissions.set({ fullPermissions });
+        // await g.commands.permissions.set({ fullPermissions });
       });
     });
   });

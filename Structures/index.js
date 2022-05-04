@@ -18,6 +18,8 @@ client.commands = new Collection();
 client.helps = [];
 client.buttons = new Collection();
 
+client.scheduler = require("node-schedule");
+
 const { DisTube } = require("distube");
 const { SpotifyPlugin } = require("@distube/spotify");
 

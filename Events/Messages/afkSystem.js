@@ -17,9 +17,6 @@ module.exports = {
       UserId: message.author.id,
     });
 
-    console.log(message.mentions.users);
-    console.log(message.mentions.members);
-
     if (message.mentions.roles.size || message.mentions.members.size) {
       message.mentions.roles.forEach((role) => {
         if (role.members.size) {

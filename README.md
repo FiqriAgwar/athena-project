@@ -131,6 +131,7 @@ This is an example of how to list things you need to use the software and how to
    npm install
    ```
 4. Get your own Discord Bot Token. [How to find it?](https://www.writebots.com/discord-bot-token/)
+  - <b>Note: Make sure Privileged Gateway Intents are enabled and OAuth2 URL Scope includes application.command</b>
 5. Get your own MongoDB Connection Url
 6. Make a `.env` file in the root and fill it like below.
    ```env

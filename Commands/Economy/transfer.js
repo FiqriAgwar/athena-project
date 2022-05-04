@@ -32,11 +32,12 @@ module.exports = {
 
     const Embed = new MessageEmbed()
       .setAuthor({
-        name: `New transaction has been recorded`,
+        name: `Bank Rotten Oil`,
         iconURL: client.user.displayAvatarURL({ dynamic: true }),
       })
+      .setTitle("Transaction Success")
       .setThumbnail(user.displayAvatarURL({ dynamic: true }))
-      .setColor("RANDOM");
+      .setColor("GREEN");
 
     const Player = await UserDB.findOne({
       UserId: user.id,
@@ -57,10 +58,7 @@ module.exports = {
       return interaction.reply({
         embeds: [
           Embed.setDescription("You have 0 money on your account.")
-            .setAuthor({
-              name: `Transaction failed.`,
-              iconURL: client.user.displayAvatarURL({ dynamic: true }),
-            })
+            .setTitle("Transaction Failed")
             .setColor("RED"),
         ],
       });
@@ -72,10 +70,7 @@ module.exports = {
           Embed.setDescription(
             "You have not enough money on your account / you have entered 0 or less money for transfer."
           )
-            .setAuthor({
-              name: `Transaction failed.`,
-              iconURL: client.user.displayAvatarURL({ dynamic: true }),
-            })
+            .setTitle("Transaction Failed")
             .setColor("RED"),
         ],
       });
@@ -90,10 +85,7 @@ module.exports = {
       return interaction.reply({
         embeds: [
           Embed.setDescription("Player doesn't exist / inactive.")
-            .setAuthor({
-              name: `Transaction failed.`,
-              iconURL: client.user.displayAvatarURL({ dynamic: true }),
-            })
+            .setTitle("Transaction Failed")
             .setColor("RED"),
         ],
       });
@@ -111,7 +103,13 @@ module.exports = {
           { name: "From", value: user.tag, inline: true },
           { name: "To", value: TargetUser.tag, inline: true },
           { name: "Amount", value: amount.toLocaleString(), inline: true }
-        ),
+        ).setFooter({
+          text: `${
+            user.id === TargetUser.id
+              ? "Thank you for wasting our time. 🙄"
+              : "Thank you for using our service 🙏"
+          }`,
+        }),
       ],
     });
   },

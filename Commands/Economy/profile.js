@@ -27,7 +27,7 @@ module.exports = {
         name: `${TargetUser.tag}'s Information`,
         iconURL: client.user.displayAvatarURL({ dynamic: true }),
       })
-      .setThumbnail(user.displayAvatarURL({ dynamic: true }))
+      .setThumbnail(TargetUser.displayAvatarURL({ dynamic: true }))
       .setColor("RANDOM");
 
     const Player = await UserDB.findOne({

@@ -42,10 +42,10 @@ module.exports = async (client, PG, Ascii) => {
 
   //-------- PERMISSION CHECK -----------//
   client.on("ready", async () => {
-    client.guilds.cache.forEach((g) => {
-      g.commands.set([]);
-    });
+    client.application.commands.set([]);
 
-    client.application.commands.set(CommandsArray);
+    client.guilds.cache.forEach((g) => {
+      g.commands.set(CommandsArray);
+    });
   });
 };

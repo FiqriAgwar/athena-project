@@ -48,4 +48,8 @@ module.exports = async (client, PG, Ascii) => {
       g.commands.set(CommandsArray);
     });
   });
+
+  client.on("guildCreate", async (guild) => {
+    guild.commands.set(CommandsArray);
+  });
 };

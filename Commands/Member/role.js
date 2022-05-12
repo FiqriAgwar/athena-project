@@ -151,7 +151,7 @@ module.exports = {
           } else {
             return interaction.reply({
               content:
-                "There is an error when adding the role. Contact Sorrow to report the bug.",
+                "There is an error when adding the role.",
               ephemeral: true,
             });
           }

@@ -1,5 +1,6 @@
 const { Perms } = require("../Validation/Permissions");
 const { Client } = require("discord.js");
+const Cron = require("node-cron");
 
 /**
  * @param {Client} client
@@ -44,9 +45,13 @@ module.exports = async (client, PG, Ascii) => {
   client.on("ready", async () => {
     client.application.commands.set([]);
 
-    client.guilds.cache.forEach((g) => {
-      g.commands.set(CommandsArray);
+    let AssignTask = Cron.schedule("* */3 * * *", async () => {
+      client.guilds.cache.forEach((g) => {
+        g.commands.set(CommandsArray);
+      });
     });
+
+    AssignTask.start();
   });
 
   client.on("guildCreate", async (guild) => {

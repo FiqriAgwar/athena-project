@@ -45,9 +45,17 @@ module.exports = async (client, PG, Ascii) => {
   client.on("ready", async () => {
     client.application.commands.set([]);
 
+    await client.guilds.cache.forEach(async (g) => {
+      await g.commands.set([]);
+      CommandsArray.forEach(async (command) => {
+        console.log(command.name);
+        await g.commands.create(command);
+      });
+    });
+
     let AssignTask = Cron.schedule("* */3 * * *", async () => {
-      client.guilds.cache.forEach((g) => {
-        g.commands.set(CommandsArray);
+      client.guilds.cache.forEach(async (g) => {
+        await g.commands.set(CommandsArray);
       });
     });
 
